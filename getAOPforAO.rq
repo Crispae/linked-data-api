@@ -1,0 +1,17 @@
+#+ summary: Returns the AOP linked with specific Adverse Outcome
+#+ endpoint: https://aopwiki.rdf.bigcat-bioinformatics.org/sparql/
+#+ tags:
+#+   - AOP
+#+ defaults:
+#+   - AOId: 1276
+
+PREFIX aopo: <http://aopkb.org/aop_ontology#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX aop.events : <https://identifiers.org/aop.events/>
+
+SELECT ?AOP ?AOPTitle WHERE {
+?AOP a aopo:AdverseOutcomePathway ;
+dc:title ?AOPTitle;
+aopo:has_adverse_outcome aop.events:?_AOId_integer.
+
+}
