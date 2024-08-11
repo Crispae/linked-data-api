@@ -11,15 +11,13 @@ PREFIX ncbitaxon: <http://purl.bioontology.org/ontology/NCBITAXON/>
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
 PREFIX mmo: <http://purl.obolibrary.org/obo/MMO_>
 
-SELECT DISTINCT ?aop ?ke (GROUP_CONCAT(DISTINCT ?speciesname; SEPARATOR=" | ") AS ?speciesnames) ?method
+SELECT  DISTINCT ?aop ?ke (group_concat(distinct ?speciesname;separator=" | ") as ?speciesnames) ?method
 WHERE {
     ?aop a aopo:AdverseOutcomePathway ;
-         rdfs:label ?_aop_id;
-         aopo:has_key_event ?ke.
+        rdfs:label ?aop_id;
+        aopo:has_key_event ?ke.
     ?ke ncbitaxon:131567 ?taxon.
-    ?taxon a ncbitaxon:131567; dc:title ?speciesname.
-    OPTIONAL { ?ke mmo:0000000 ?method. }
-    VALUES ?_aop_id { ?__AOId }
-}
-ORDER BY ASC(?aop)
-
+    ?taxon a ncbitaxon:131567; dc:title ?speciesname
+    OPTIONAL {?ke mmo:0000000 ?method.}
+VALUES ?aop_id {"AOP 12" "AOP 57" "AOP 441"}
+} ORDER BY ASC (?aop)
