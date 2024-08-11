@@ -14,12 +14,12 @@ PREFIX mmo: <http://purl.obolibrary.org/obo/MMO_>
 SELECT DISTINCT ?aop ?ke (GROUP_CONCAT(DISTINCT ?speciesname; SEPARATOR=" | ") AS ?speciesnames) ?method
 WHERE {
     ?aop a aopo:AdverseOutcomePathway ;
-         rdfs:label ?_aop_id;
+         rdfs:label ?aop_id;
          aopo:has_key_event ?ke.
     ?ke ncbitaxon:131567 ?taxon.
     ?taxon a ncbitaxon:131567; dc:title ?speciesname.
     OPTIONAL { ?ke mmo:0000000 ?method. }
-    FILTER (?_aop_id = ?__AOId)
+    FILTER (?aop_id = ?__AOId)
 }
 ORDER BY ASC(?aop)
 
