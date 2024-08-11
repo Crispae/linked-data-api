@@ -1,0 +1,24 @@
+#+ summary: Returns the methods associated with AOP
+#+ endpoint: https://aopwiki.rdf.bigcat-bioinformatics.org/sparql/
+#+ tags:
+#+   - AOP
+#+ defaults:
+#+   - AOId: "AO 12" 
+
+PREFIX aopo: <http://aopkb.org/aop_ontology#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ncbitaxon: <http://purl.bioontology.org/ontology/NCBITAXON/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX mmo: <http://purl.obolibrary.org/obo/MMO_>
+
+SELECT DISTINCT ?aop ?ke (GROUP_CONCAT(DISTINCT ?speciesname; SEPARATOR=" | ") AS ?speciesnames) ?method
+WHERE {
+    ?aop a aopo:AdverseOutcomePathway ;
+         rdfs:label ?_aop_id;
+         aopo:has_key_event ?ke.
+    ?ke ncbitaxon:131567 ?taxon.
+    ?taxon a ncbitaxon:131567; dc:title ?speciesname.
+    OPTIONAL { ?ke mmo:0000000 ?method. }
+    VALUES ?_aop_id { ?__AOId }
+}
+ORDER BY ASC(?aop)
