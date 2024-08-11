@@ -1,0 +1,14 @@
+#+ endpoint: https://aopwiki.rdf.bigcat-bioinformatics.org/sparql/
+
+SELECT ?AO ?AOname ?AOP (CONCAT('"',GROUP_CONCAT(?ChemicalName;SEPARATOR='","'),'"') AS ?ChemicalNames) WHERE {
+  ?AO a aopo:KeyEvent ; 
+  dc:identifier ?AOLookup ; 
+  dc:title ?AOname . 
+  ?AOP a aopo:AdverseOutcomePathway ; 
+  aopo:has_adverse_outcome ?AOLookup ;
+  nci:C54571 ?Stressor .
+  ?Stressor dc:title ?StressorName.
+  OPTIONAL {?Stressor aopo:has_chemical_entity ?Chemical. 
+            ?Chemical dc:title ?ChemicalName.}
+  FILTER regex (?AOname, "fibrosis", "i")}
+  ORDER BY DESC (?AO)
