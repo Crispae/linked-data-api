@@ -1,0 +1,16 @@
+#+ summary: Returns the stressors linked with specific Adverse Outcome Pathway
+#+ endpoint: https://aopwiki.rdf.bigcat-bioinformatics.org/sparql/
+#+ tags:
+#+   - AOP
+#+ defaults:
+#+   - AOP: https://identifiers.org/aop/54
+
+PREFIX nci: <http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT ?AOP  ?stressorName
+WHERE {
+    ?AOP nci:C54571 ?stressor.
+    ?stressor dc:title ?stressorName .
+    FILTER (?AOP = ?_AOP_iri)
+}
