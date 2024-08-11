@@ -3,16 +3,13 @@
 #+ tags:
 #+   - AOP
 #+ defaults:
-#+   - AOId: 1276
+#+   - AO: https://identifiers.org/aop.events/1276
 
 PREFIX aopo: <http://aopkb.org/aop_ontology#>
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
-PREFIX aop.events : <https://identifiers.org/aop.events/>
 
 SELECT ?AOP ?AOPTitle WHERE {
-?AOP a aopo:AdverseOutcomePathway ;
-dc:title ?AOPTitle;
-aopo:has_adverse_outcome ?adverseOutcome.
-FILTER (?adverseOutcome = aop_events:?_AOId_integer)
-
+    ?AOP a aopo:AdverseOutcomePathway ;
+          dc:title ?AOPTitle;
+          aopo:has_adverse_outcome ?__AO_iri .
 }
