@@ -12,6 +12,7 @@ PREFIX aop.events : <https://identifiers.org/aop.events/>
 SELECT ?AOP ?AOPTitle WHERE {
 ?AOP a aopo:AdverseOutcomePathway ;
 dc:title ?AOPTitle;
-aopo:has_adverse_outcome aop.events:?_AOId_integer.
+aopo:has_adverse_outcome ?adverseOutcome.
+FILTER (?adverseOutcome = aop_events:?_AOId_integer)
 
 }
