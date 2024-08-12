@@ -1,0 +1,17 @@
+#+ summary: Return Pathways linked with PubMed ID
+#+ endpoint: https://sparql.wikipathways.org/sparql/
+#+ tags:
+#+   - WikiPathway
+#+ defaults:
+#+   - PubMedID: https://identifiers.org/pubmed/16179585
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX wp: <http://vocabularies.wikipathways.org/wp#>
+
+SELECT DISTINCT ?pathway ?pubmed 
+WHERE {
+  ?pubmed a wp:PublicationReference . 
+  ?pubmed dcterms:isPartOf ?pathway .
+  FILTER(?pubmed = ?_PubMedID_iri)
+}
