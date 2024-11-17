@@ -1,0 +1,21 @@
+#+ summary: Returns nanopublication based on keyEvent title
+#+ endpoint: http://blaze.aopsketchpad.insilicohub.org/blazegraph/sparql
+#+ tags:
+#+   - AOP-SKETCHPAD
+
+PREFIX ntemplate: <https://w3id.org/np/o/ntemplate/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX aopdo: <https://w3id.org/aopdo/>
+
+SELECT ?nanopubURI ?keyEventTitle
+WHERE {
+  GRAPH ?assertionId {
+    aopdo:KeyEvent aopdo:hasTitle ?keyEventTitle ;
+    
+    # Case-insensitive regex search on keyEventTitle
+    FILTER(REGEX(?keyEventTitle, ?_KeyEventTitle, "i"))
+  }
+  
+  # Extract portion before the suffix (assumed to be '#')
+  BIND(STRBEFORE(STR(?assertionId), "#") AS ?nanopubURI)
+}
