@@ -10,10 +10,10 @@ PREFIX aopdo: <https://w3id.org/aopdo/>
 SELECT ?nanopubURI ?AOPTitle
 WHERE {
   GRAPH ?assertionId {
-    aopdo:AOP aopdo:hasTitle ?keyEventTitle ;
+    aopdo:AOP aopdo:hasTitle ?AOPTitle ;
     
     # Case-insensitive regex search on AOPTitle
-    FILTER(REGEX(?keyEventTitle, ?_AOPTitle, "i"))
+    FILTER(REGEX(?AOPTitle, ?_AOPTitle, "i"))
   }
         
   # Extract portion before the suffix (assumed to be '#')
